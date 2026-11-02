@@ -46,6 +46,10 @@ def transform(df):
 
     too_long = (df["duration_sec"] > 86400) & df["reject_reason"].isnull()
     df.loc[too_long, "reject_reason"] = "over_24_hours"
+    main_month = df["start_time"].dt.to_period("M").mode()[0]
+    wrong_month = (df["start_time"].dt.to_period("M") != main_month) & df["reject_reason"].isnull()
+    df.loc[wrong_month, "reject_reason"] = "outside_file_month"
+    
 
     # 4. Split into good and rejected
     clean = df[df["reject_reason"].isnull()].drop(columns="reject_reason")
