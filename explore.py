@@ -15,7 +15,7 @@ print(df["usertype"].value_counts())                      # rider types
 print(df["tripduration"].describe())                      # min, max, average
 print(df[df["birth year"].isnull()]["usertype"].value_counts())  # who has no birth year?
 
-import pandas as pd
+
 
 pd.set_option("display.width", 200)
 pd.set_option("display.max_columns", 20)
@@ -37,7 +37,7 @@ calc = (pd.to_datetime(df["stoptime"]) - pd.to_datetime(df["starttime"])).dt.tot
 print((calc - df["tripduration"]).abs().gt(1).sum())
 
 # Cleaning the data
-import pandas as pd
+
 
 RAW_FILE = "data/201306-citibike-tripdata.csv"
 
